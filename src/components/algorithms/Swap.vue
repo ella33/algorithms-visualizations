@@ -10,6 +10,7 @@
       <h2>Swap algorithm</h2>
       <div class="hint">Swapping two variables refers to mutually exchanging the values of the variables.</div>
       <div class="hint">Given 2 variables a and b, the algorithm uses a third temporary variable c in order to exchange their values.</div>
+      <div class="hint">At the end of the algorithm, a will hold b's value and b will hold a's value.</div>
       <div class="instructions-panel">
         <p class="command command-1">c = a;</p>
         <p class="command command-2">a = b;</p>
@@ -68,6 +69,15 @@ export default {
       }
     },
     scheduleSwaps(timeline) {
+      timeline.add({
+        targets: '.cup',
+        duration: 300,
+        easing: 'cubicBezier(.5, .05, .1, .3)',
+        keyframes: [
+          { scale: 1.2 },
+          { scale: 1 },
+        ],
+      });
       this.scheduleSwap({
         command: '.command-1',
         from: {
@@ -110,7 +120,7 @@ export default {
           target: '.c',
           y: 110,
           x: 0,
-          color: '#6CD4FF',
+          color: 'rgba(0, 0, 0, 0.3)',
         },
       }, timeline);
     },

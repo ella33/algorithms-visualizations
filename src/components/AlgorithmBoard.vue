@@ -16,6 +16,11 @@
 
 <script>
 import anime from 'animejs/lib/anime.es.js';
+const timelineDefaultConfig = {
+  autoplay: false,
+  duration: 1000,
+  easing: 'easeOutExpo',
+};
 
 export default {
   name: 'AlgorithmBoard',
@@ -29,7 +34,7 @@ export default {
       this.timelineInProgress = true;
       if (!this.playedOnce) {
         this.timeline.play();
-        this.playedOnce = false;
+        this.playedOnce = true;
       } else {
         this.timeline.restart();
       }
@@ -39,11 +44,7 @@ export default {
     },
   },
   mounted() {
-    this.timeline = anime.timeline({
-      autoplay: false,
-      duration: 1000,
-      easing: 'easeOutExpo',
-    });
+    this.timeline = anime.timeline(timelineDefaultConfig);
     this.$emit('ready', this.timeline);
   },
 };
