@@ -1,18 +1,84 @@
 <template>
-  <div class="app-header">
-    <h1>Algorithms' visualizations</h1>
+  <div class="app-header-wrapper">
+    <router-link to="/" v-slot="{ navigate }">
+      <h1 @click="navigate">Animated algorithms</h1>
+    </router-link>
+
+    <button @click="toggleMenu">Explore</button>
+
+    <div v-bind:class="['menu', { open: menuOpened }]">
+      <router-link to="/swap">Swap algorithm</router-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
-}
+  data: () => ({
+    menuOpened: false,
+  }),
+  watch: {
+    '$route'() {
+      if (this.menuOpened) this.menuOpened = false;
+    },
+  },
+  methods: {
+    toggleMenu() {
+      this.menuOpened = !this.menuOpened;
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .app-header {
-    padding: 0px 10px;
-    border-bottom: 1px solid #c4c4c4;
-  }
+.app-header-wrapper {
+  padding: 20px;
+  height: 85px;
+  box-shadow: 0px 7px 5px 0px #EBEBEB;
+  background-color: #BA7BA1;
+  color: #F9E7E7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button{
+  color: #fff;
+  padding: 5px 10px;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+h1 {
+  cursor: pointer;
+  margin: 0;
+}
+
+.menu {
+  transform: translateX(100%);
+  width: 350px;
+  height: calc(100vh - 83px);
+  background: #C28CAE;
+  z-index: 5;
+  position: absolute;
+  top: 85px;
+  right: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu.open {
+  transform: translateX(0);
+  opacity: 1;
+}
 </style>
