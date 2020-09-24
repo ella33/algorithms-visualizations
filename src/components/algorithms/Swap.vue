@@ -1,5 +1,5 @@
 <template>
-  <AlgorithmBoard v-on:ready="scheduleSwaps($event)">
+  <AlgorithmBoard v-on:ready="onTimelineReady($event)">
     <template #timeline>
       <div class="cup a">a</div>
       <div class="cup b">b</div>
@@ -7,31 +7,41 @@
     </template>
 
     <template #blackboard>
-      <h2>Swap algorithm</h2>
-      <div class="hint">Swapping two variables refers to mutually exchanging the values of the variables.</div>
-      <div class="hint">Given 2 variables a and b, the algorithm uses a third temporary variable c in order to exchange their values.</div>
-      <div class="hint">At the end of the algorithm, a will hold b's value and b will hold a's value.</div>
-      <div class="instructions-panel">
-        <p class="command command-1">c = a;</p>
-        <p class="command command-2">a = b;</p>
-        <p class="command command-3">b = c;</p>
-      </div>
+      <InstructionsPanel :commands="commands" :hints="hints" title="Swap algorithm" />
     </template>
   </AlgorithmBoard>
 </template>
 
 <script>
-import AlgorithmBoard from '../AlgorithmBoard.vue';
+import AlgorithmBoard from '../shared/AlgorithmBoard.vue';
+import InstructionsPanel from '../shared/InstructionsPanel.vue';
+import { flattenAlgorithm } from '../utils';
+
+const algorithm = [
+  { command: 'c = a;' },
+  { command: 'a = b;' },
+  { command: 'b = c;' },
+];
+
+const hints = [
+  'Swapping two variables refers to mutually exchanging the values of the variables.',
+  'Given 2 variables a and b, the algorithm uses a third temporary variable c in order to exchange their values.',
+  'At the end of the algorithm, a will hold b\'s value and b will hold a\'s value.',
+];
 
 export default {
   name: 'Swap',
   components: {
-    AlgorithmBoard
+    AlgorithmBoard,
+    InstructionsPanel,
   },
+  data: () => ({
+    commands: [],
+    hints: [],
+  }),
   methods: {
     scheduleSwap(options, timeline) {
       const { command, from, to } = options;
-
       timeline.add({
         targets: command,
         duration: 300,
@@ -68,61 +78,66 @@ export default {
         });
       }
     },
-    scheduleSwaps(timeline) {
-      timeline.add({
-        targets: '.cup',
-        duration: 300,
-        easing: 'cubicBezier(.5, .05, .1, .3)',
-        keyframes: [
-          { scale: 1.2 },
-          { scale: 1 },
-        ],
+    onTimelineReady(timeline) {
+      this.commands = flattenAlgorithm(algorithm);
+      this.hints = hints;
+
+      this.$nextTick(() => {
+        timeline.add({
+          targets: '.cup',
+          duration: 300,
+          easing: 'cubicBezier(.5, .05, .1, .3)',
+          keyframes: [
+            { scale: 1.2 },
+            { scale: 1 },
+          ],
+        });
+        this.scheduleSwap({
+          command: '.command-1',
+          from: {
+            target: '.c',
+            y: -110,
+            x: -220,
+            color: '#F36886',
+          },
+          to: {
+            target: '.a',
+            y: 110,
+            x: 220,
+          },
+        }, timeline);
+
+        this.scheduleSwap({
+          command: '.command-2',
+          from: {
+            target: '.a',
+            y: -110,
+            x: 110,
+            color: '#67EACA',
+          },
+          to: {
+            target: '.b',
+            y: 110,
+            x: 110,
+          },
+        }, timeline);
+
+        this.scheduleSwap({
+          command: '.command-3',
+          from: {
+            target: '.b',
+            y: -110,
+            x: -110,
+            color: '#F36886',
+          },
+          to: {
+            target: '.c',
+            y: 110,
+            x: 0,
+            color: 'rgba(0, 0, 0, 0.3)',
+          },
+        }, timeline);
       });
-      this.scheduleSwap({
-        command: '.command-1',
-        from: {
-          target: '.c',
-          y: -110,
-          x: -220,
-          color: '#F36886',
-        },
-        to: {
-          target: '.a',
-          y: 110,
-          x: 220,
-        },
-      }, timeline);
-
-      this.scheduleSwap({
-        command: '.command-2',
-        from: {
-          target: '.a',
-          y: -110,
-          x: 110,
-          color: '#67EACA',
-        },
-        to: {
-          target: '.b',
-          y: 110,
-          x: 110,
-        },
-      }, timeline);
-
-      this.scheduleSwap({
-        command: '.command-3',
-        from: {
-          target: '.b',
-          y: -110,
-          x: -110,
-          color: '#F36886',
-        },
-        to: {
-          target: '.c',
-          y: 110,
-          x: 0,
-          color: 'rgba(0, 0, 0, 0.3)',
-        },
-      }, timeline);
     },
   },
 }
@@ -150,14 +165,5 @@ export default {
 
 .c {
   background-color: #6CD4FF;
-}
-
-.command {
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.hint {
-  font-size: 0.75rem;
 }
 </style>

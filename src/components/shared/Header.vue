@@ -8,6 +8,7 @@
 
     <div v-bind:class="['menu', { open: menuOpened }]">
       <router-link to="/swap">Swap algorithm</router-link>
+      <router-link to="/maxn">Maximum of n numbers algorithm</router-link>
     </div>
   </div>
 </template>
@@ -75,6 +76,8 @@ h1 {
 .menu a {
   color: #fff;
   text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
 }
 
 .menu.open {

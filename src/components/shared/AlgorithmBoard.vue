@@ -58,11 +58,6 @@ export default {
   flex-direction: column;
 }
 
-.command {
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
 .timeline button {
   position: fixed;
   bottom: 0;
