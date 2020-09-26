@@ -4,7 +4,7 @@
     </template>
 
     <template #blackboard>
-      <InstructionsPanel :commands="commands" :hints="hints" title="Maximum of n algorithm" />
+      <InstructionsPanel :commands="commands" :hints="hints" :title="$t('ALGORITHMS.maxOfN')" />
     </template>
   </AlgorithmBoard>
 </template>

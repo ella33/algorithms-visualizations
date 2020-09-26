@@ -1,14 +1,18 @@
 <template>
   <div class="app-header-wrapper">
     <router-link to="/" v-slot="{ navigate }">
-      <h1 @click="navigate">Animated algorithms</h1>
+      <h1 @click="navigate">{{$t('GENERAL.title')}}</h1>
     </router-link>
 
-    <button @click="toggleMenu">Explore</button>
+    <div>
+      <button @click="changeLanguage('en')">{{$t('HEADER.lang.en')}}</button>
+      <button @click="changeLanguage('ro')">{{$t('HEADER.lang.ro')}}</button>
+      <button @click="toggleMenu">{{$t('HEADER.explore')}}</button>
+    </div>
 
     <div v-bind:class="['menu', { open: menuOpened }]">
-      <router-link to="/swap">Swap algorithm</router-link>
-      <router-link to="/maxn">Maximum of n numbers algorithm</router-link>
+      <router-link to="/swap">{{$t('ALGORITHMS.swap.title')}}</router-link>
+      <router-link to="/maxn">{{$t('ALGORITHMS.maxOfN')}}</router-link>
     </div>
   </div>
 </template>
@@ -27,6 +31,9 @@ export default {
   methods: {
     toggleMenu() {
       this.menuOpened = !this.menuOpened;
+    },
+    changeLanguage(language) {
+      this.$i18n.locale = language;
     },
   },
 };

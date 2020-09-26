@@ -3,11 +3,11 @@
     <template #timeline>
       <div class="cup a">a</div>
       <div class="cup b">b</div>
-      <div class="cup c">c</div>
+      <div class="cup aux">aux</div>
     </template>
 
     <template #blackboard>
-      <InstructionsPanel :commands="commands" :hints="hints" title="Swap algorithm" />
+      <InstructionsPanel :commands="commands" :explanation="$t('ALGORITHMS.swap.explanation')" :title="$t('ALGORITHMS.swap.title')" />
     </template>
   </AlgorithmBoard>
 </template>
@@ -16,18 +16,8 @@
 import AlgorithmBoard from '../shared/AlgorithmBoard.vue';
 import InstructionsPanel from '../shared/InstructionsPanel.vue';
 import { flattenAlgorithm } from '../utils';
-
-const algorithm = [
-  { command: 'c = a;' },
-  { command: 'a = b;' },
-  { command: 'b = c;' },
-];
-
-const hints = [
-  'Swapping two variables refers to mutually exchanging the values of the variables.',
-  'Given 2 variables a and b, the algorithm uses a third temporary variable c in order to exchange their values.',
-  'At the end of the algorithm, a will hold b\'s value and b will hold a\'s value.',
-];
+import getAlgorithm from '../../i18n/algorithms';
+import { ALGORITHMS } from '../../Constants';
 
 export default {
   name: 'Swap',
@@ -37,15 +27,24 @@ export default {
   },
   data: () => ({
     commands: [],
-    hints: [],
   }),
+  watch: {
+    '$i18n.locale'() {
+      this.setAlgorithmCommands();
+    },
+  },
   methods: {
+    setAlgorithmCommands() {
+      const algorithm = getAlgorithm(this.$i18n.locale, ALGORITHMS.swap);
+      this.commands = flattenAlgorithm(algorithm);
+    },
     scheduleSwap(options, timeline) {
       const { command, from, to } = options;
       timeline.add({
         targets: command,
         duration: 300,
         backgroundColor: '#F8B500',
+        color: '#3C1518',
       }).add({
         targets: from.target,
         keyframes: [
@@ -79,8 +78,7 @@ export default {
       }
     },
     onTimelineReady(timeline) {
-      this.commands = flattenAlgorithm(algorithm);
-      this.hints = hints;
+      this.setAlgorithmCommands();
 
       this.$nextTick(() => {
         timeline.add({
@@ -95,7 +93,7 @@ export default {
         this.scheduleSwap({
           command: '.command-1',
           from: {
-            target: '.c',
+            target: '.aux',
             y: -110,
             x: -220,
             color: '#F36886',
@@ -131,7 +129,7 @@ export default {
             color: '#F36886',
           },
           to: {
-            target: '.c',
+            target: '.aux',
             y: 110,
             x: 0,
             color: 'rgba(0, 0, 0, 0.3)',
@@ -163,7 +161,7 @@ export default {
   background-color: #67EACA;
 }
 
-.c {
+.aux {
   background-color: #6CD4FF;
 }
 </style>

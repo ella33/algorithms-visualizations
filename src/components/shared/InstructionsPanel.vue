@@ -1,9 +1,7 @@
 <template>
   <div class="instructions-panel">
     <h2>{{title}}</h2>
-    <div class="hints-wrapper">
-      <div class="hint" v-for="(hint, index) in hints" :key="`hint-${index}`">{{hint}}</div>
-    </div>
+    <div class="hint" v-html="explanation"></div>
     <div
       v-for="item in commands"
       :key="item.id"
@@ -19,7 +17,7 @@ export default {
   name: 'InstructionsPanel',
   props: {
     commands: Array,
-    hints: Array,
+    explanation: String,
     title: String,
   },
 }
@@ -38,11 +36,8 @@ export default {
   max-width: 300px;
 }
 
-.hints-wrapper {
-  margin-bottom: 20px;
-}
-
 .hint {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
 }
 </style>

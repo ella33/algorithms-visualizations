@@ -4,7 +4,7 @@
       <div class="wrapper timeline">
         <slot name="timeline"></slot>
 
-        <button v-on:click="runAlgorithm" :disabled="timelineInProgress">Run</button>
+        <button v-on:click="runAlgorithm" :disabled="timelineInProgress">{{$t('GENERAL.run')}}</button>
       </div>
     </div>
 

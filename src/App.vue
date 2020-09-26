@@ -29,6 +29,10 @@ body, html {
   margin: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 #app {
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -62,5 +66,6 @@ button {
   cursor: pointer;
   font-size: 1.25rem;
   background: transparent;
+  outline: none;
 }
 </style>
