@@ -43,8 +43,8 @@ export default {
       timeline.add({
         targets: command,
         duration: 300,
-        backgroundColor: '#F8B500',
-        color: '#3C1518',
+        backgroundColor: '#FDFDFC',
+        color: '#252525',
       }).add({
         targets: from.target,
         keyframes: [

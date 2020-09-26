@@ -64,7 +64,7 @@ export default {
   width: 300px;
   padding: 10px;
   border-radius: 10px 10px 0 0;
-  background-image: linear-gradient(45deg, #ff512f, #f09819);
+  background-image: linear-gradient(45.34deg, #355C7D 5.66%, #6C5B7B 49.09%, #C06C84 93.43%);
   color: #fff;
   box-shadow: 6px 4px 5px 0px #EBEBEB;
 }
