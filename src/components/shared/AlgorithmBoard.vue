@@ -44,6 +44,7 @@ export default {
     },
   },
   mounted() {
+    console.log('hereee');
     this.timeline = anime.timeline(timelineDefaultConfig);
     this.$emit('ready', this.timeline);
   },
