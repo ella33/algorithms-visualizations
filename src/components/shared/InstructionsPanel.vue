@@ -13,12 +13,32 @@
 </template>
 
 <script>
+import { flattenAlgorithm } from '../utils';
+import getAlgorithm from '../../i18n/algorithms';
+
 export default {
   name: 'InstructionsPanel',
+  data: () => ({
+    commands: [],
+  }),
   props: {
-    commands: Array,
+    algorithmName: String,
     explanation: String,
     title: String,
+  },
+  watch: {
+    '$i18n.locale'() {
+      this.setAlgorithmCommands();
+    },
+  },
+  methods: {
+    setAlgorithmCommands() {
+      const algorithm = getAlgorithm(this.$i18n.locale, this.$props.algorithmName);
+      this.commands = flattenAlgorithm(algorithm);
+    },
+  },
+  created() {
+    this.setAlgorithmCommands();
   },
 }
 </script>

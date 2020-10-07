@@ -29,8 +29,15 @@ export default {
     playedOnce: false,
     timelineInProgress: false,
   }),
+  props: {
+    onRun: {
+      type: Function,
+      default: () => () => {},
+    },
+  },
   methods: {
     runAlgorithm() {
+      this.$props.onRun();
       this.timelineInProgress = true;
       if (!this.playedOnce) {
         this.timeline.play();
@@ -56,17 +63,23 @@ export default {
   color: #fff;
   font-size: 1.25rem;
   flex-direction: column;
+  overflow: auto;
+}
+
+.timeline {
+  padding: 20px 20px 60px 20px;
+  position: relative;
 }
 
 .timeline button {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 300px;
   padding: 10px;
   border-radius: 10px 10px 0 0;
   background-image: linear-gradient(45.34deg, #355C7D 5.66%, #6C5B7B 49.09%, #C06C84 93.43%);
   color: #fff;
-  box-shadow: 6px 4px 5px 0px #EBEBEB;
+  box-shadow: 6px -2px 5px 0px #EBEBEB;
 }
 
 .timeline button:disabled {

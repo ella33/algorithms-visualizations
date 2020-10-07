@@ -12,7 +12,7 @@
 
     <div v-bind:class="['menu', { open: menuOpened }]">
       <router-link to="/swap">{{$t('ALGORITHMS.swap.title')}}</router-link>
-      <router-link to="/maxn">{{$t('ALGORITHMS.maxOfN')}}</router-link>
+      <router-link to="/maxn">{{$t('ALGORITHMS.maxOfN.title')}}</router-link>
     </div>
   </div>
 </template>
