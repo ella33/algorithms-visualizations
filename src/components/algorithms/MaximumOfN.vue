@@ -82,11 +82,11 @@ export default {
 
       for (let i = 1; i < this.n; i++) {
         const isGt = (this.x[i] > this.max);
-        algCommand({ commandNumber: 4 }).add({
+        algCommand({ commandNumber: 4 });
+        algCommand({ commandNumber: 5 }).add({
           targets: `.x-${i + 1}`,
           opacity: 1,
         });
-        algCommand({ commandNumber: 5 });
         algCommand({ commandNumber: 6 });
 
         algCommand({
