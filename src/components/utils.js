@@ -34,3 +34,21 @@ export const flattenAlgorithm = (algo) => {
     text, id: index + 1,
   }));
 };
+
+export function highlightCommand(timeline, { commandNumber, animeOptions = {} } = {}) {
+  if (commandNumber < 0) return timeline; /** noop */
+
+  if (!commandNumber) {
+    this.activeCommand = (this.activeCommand || 0) + 1;
+  }
+
+  const targets = `.command-${commandNumber || this.activeCommand}`;
+
+  return timeline.add({
+    targets,
+    backgroundColor: '#FDFDFC',
+    color: '#252525',
+    scale: [1, 1.05, 1],
+    ...animeOptions,
+  });
+}

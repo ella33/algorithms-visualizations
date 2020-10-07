@@ -29,10 +29,6 @@ body, html {
   margin: 0;
 }
 
-body {
-  overflow-x: hidden;
-}
-
 #app {
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -48,10 +44,28 @@ body {
   flex: 1;
 }
 
+@media screen and (max-width: 960px) {
+  .main {
+    flex-direction: column;
+  }
+}
+
 .content-wrapper {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-flex-item {
+  flex: 1;
+}
+
+.centered-items {
+  align-items: center;
 }
 
 .wrapper {

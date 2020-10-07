@@ -32,9 +32,9 @@ export default {
     algorithmName: ALGORITHMS.swap,
   }),
   methods: {
-    scheduleSwap(options, timeline) {
+    scheduleSwap(options) {
       const { command, from, to } = options;
-      timeline.add({
+      this.timeline.add({
         targets: command,
         duration: 300,
         backgroundColor: '#FDFDFC',
@@ -64,7 +64,7 @@ export default {
       });
 
       if (to.color) {
-        timeline.add({
+        this.timeline.add({
           targets: to.target,
           duration: 300,
           backgroundColor: to.color,
@@ -72,7 +72,8 @@ export default {
       }
     },
     onTimelineReady(timeline) {
-      timeline.add({
+      this.timeline = timeline;
+      this.timeline.add({
         targets: '.cup',
         duration: 300,
         easing: 'cubicBezier(.5, .05, .1, .3)',
@@ -94,7 +95,7 @@ export default {
           y: 110,
           x: 220,
         },
-      }, timeline);
+      });
 
       this.scheduleSwap({
         command: '.command-2',
@@ -109,7 +110,7 @@ export default {
           y: 110,
           x: 110,
         },
-      }, timeline);
+      });
 
       this.scheduleSwap({
         command: '.command-3',
@@ -125,7 +126,7 @@ export default {
           x: 0,
           color: 'rgba(0, 0, 0, 0.3)',
         },
-      }, timeline);
+      });
     },
   },
 }

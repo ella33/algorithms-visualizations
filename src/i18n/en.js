@@ -2,19 +2,22 @@ import { ALGORITHMS } from '../Constants';
 
 export const algorithms = {
   [ALGORITHMS.swap]: [
-    { command: 'aux=a;' },
-    { command: 'a=b;' },
-    { command: 'b=aux;' },
+    { command: 'aux = a;' },
+    { command: 'a = b;' },
+    { command: 'b = aux;' },
   ],
   [ALGORITHMS.maxOfN]: [
-    { command: 'max = list[0];' },
+    { command: 'read n;' },
+    { command: 'read x;' },
+    { command: 'max = x;' },
     {
-      command: 'for (i = 1; i < n; i++) {',
+      command: `for (i = 2; i < n; i++) {`,
       block: [
+        { command: 'read x; '},
         {
-          command: 'if (list[i] > max) {',
+          command: 'if (x > max) {',
           block: [
-            { command: 'max = list[i];' }
+            { command: `max = x;` }
           ],
         },
         { command: '}' },

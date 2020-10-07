@@ -4,25 +4,28 @@ const assign = '&#8592;';
 
 export const algorithms = {
   [ALGORITHMS.swap]: [
-    { command: `aux${assign}a;` },
-    { command: `a${assign}b;` },
-    { command: `b${assign}aux;` },
+    { command: `aux ${assign} a;` },
+    { command: `a ${assign} b;` },
+    { command: `b ${assign} aux;` },
   ],
   [ALGORITHMS.maxOfN]: [
-    { command: 'max = list[0];' },
+    { command: 'citeste n;' },
+    { command: 'citeste x;' },
+    { command: `max ${assign} x;` },
     {
-      command: 'for (i = 1; i < n; i++) {',
+      command: `pentru i ${assign} 2,n executa`,
       block: [
+        { command: 'citeste x; '},
         {
-          command: 'if (list[i] > max) {',
+          command: 'daca (x > max) atunci',
           block: [
-            { command: 'max = list[i];' }
+            { command: `max ${assign} x;` }
           ],
         },
-        { command: '}' },
+        { command: 'sf_daca;' },
       ],
     },
-    { command: '}' },
+    { command: 'sf_pentru;' },
   ],
 };
 
@@ -48,7 +51,7 @@ export default {
     },
     maxOfN: {
       title: 'Algoritmul de determinare a maximului dintre n numere',
-      explanation: 'The algorithm of determining the maximum out of n numbers assumes the first element as maximum.<br />Then it repeatedly compares each element with max.<br />If the element is greater than max, then we update the value of maximum.<br />At the end of the algorithm, max will hold the largest number from the list.',
+      explanation: 'Algoritmul de determinare a maximului dintre n numere presupune ca primul numar citit este cel mai mare.<br />Apoi, itereaza si compara fiecare dintre celelalte numere citite cu maximul curent.<br />Daca numarul este mai mare, atunci se actualizeaza valoarea maximului.<br />La finalul algoritmului, max va contine cel mai mare numar citit dintre cele n valori.',
     },
   },
 };
