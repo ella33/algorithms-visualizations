@@ -67,13 +67,14 @@ h1 {
 
 .menu {
   transform: translateX(100%);
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   height: calc(100vh - 83px);
   background: #C28CAE;
   z-index: 5;
   position: absolute;
   top: 85px;
-  right: 0;
+  right: 0px;
   opacity: 0;
   transition: all 0.3s ease-in-out;
   padding: 20px;

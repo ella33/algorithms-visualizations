@@ -69,6 +69,7 @@ export default {
 .timeline {
   padding: 20px 20px 60px 20px;
   position: relative;
+  min-height: 450px;
 }
 
 .timeline button {

@@ -46,9 +46,21 @@ export function highlightCommand(timeline, { commandNumber, animeOptions = {} } 
 
   return timeline.add({
     targets,
+    duration: 500,
     backgroundColor: '#FDFDFC',
     color: '#252525',
     scale: [1, 1.05, 1],
     ...animeOptions,
+  });
+}
+
+export function resetCommands(timeline, commands) {
+  const targets = commands.map((commandNumber) => `.command-${commandNumber}`);
+
+  return timeline.add({
+    targets,
+    duration: 100,
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    color: '#fff',
   });
 }

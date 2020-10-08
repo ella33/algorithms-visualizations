@@ -18,7 +18,17 @@
           </div>
         </div>
 
-        <div class="max">{{max}}</div>
+        <div class="bubble-container">
+          <div>
+            <div class="current-x">
+              <div class="bubble-x"></div>
+              <div class="value">{{currentX}}</div>
+            </div>
+          </div>
+          <div>
+            <div class="max">max: {{max}}</div>
+          </div>
+        </div>
       </div>
     </template>
 
@@ -36,7 +46,7 @@
 import AlgorithmBoard from '../shared/AlgorithmBoard.vue';
 import InstructionsPanel from '../shared/InstructionsPanel.vue';
 import { ALGORITHMS } from '../../Constants';
-import { highlightCommand } from '../utils';
+import { highlightCommand, resetCommands } from '../utils';
 
 export default {
   name: 'MaximumOfN',
@@ -49,10 +59,11 @@ export default {
     n: 0,
     x: [],
     max: 0,
+    currentX: 0,
   }),
   created() {
     this.n = 5;
-    this.x = [8, 0, 11, 3, 5];
+    this.x = [8, 0, 11, 30, 5];
   },
   methods: {
     onRunAlgorithm() {
@@ -62,6 +73,7 @@ export default {
       this.activeCommand = 0;
       this.timeline = timeline;
       const algCommand = highlightCommand.bind({}, this.timeline);
+      const resetAlgCommands = resetCommands.bind(null, this.timeline);
       this.max = this.x[0];
 
       algCommand().add({
@@ -71,6 +83,13 @@ export default {
 
       algCommand().add({
         targets: ['.box-queue', '.x-1'],
+        opacity: 1,
+        begin: () => {
+          this.currentX = this.x[0];
+        }
+      }).add({
+        targets: '.current-x',
+        duration: 100,
         opacity: 1,
       });
 
@@ -82,11 +101,22 @@ export default {
 
       for (let i = 1; i < this.n; i++) {
         const isGt = (this.x[i] > this.max);
+        resetAlgCommands([4, 5, 6, 7, 8]);
+
         algCommand({ commandNumber: 4 });
         algCommand({ commandNumber: 5 }).add({
           targets: `.x-${i + 1}`,
           opacity: 1,
+          duration: 100,
+        }).add({
+          targets: '.bubble-x',
+          duration: 500,
+          scale: this.x[i] ? Math.min((this.x[i] / this.max), 2) : 0,
+          begin: () => {
+            this.currentX = this.x[i];
+          },
         });
+
         algCommand({ commandNumber: 6 });
 
         algCommand({
@@ -162,8 +192,8 @@ export default {
 .max {
   opacity: 0;
   color: #fff;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: #D72483;
   transform: scale(0);
@@ -173,7 +203,44 @@ export default {
   box-shadow: 6px 4px 5px 0px #EBEBEB;
 }
 
+.current-x {
+  position: relative;
+  opacity: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.current-x .value {
+  z-index: 33;
+}
+
+.current-x, .bubble-x {
+  width: 100px;
+  height: 100px;
+  max-width: 200px;
+}
+
+.bubble-x {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #F4F7BE;
+  border-radius: 50%;
+  box-shadow: 6px 4px 5px 0px #EBEBEB;
+}
+
 .variables {
   margin-bottom: 70px;
+}
+
+.bubble-container {
+  display: flex;
+  align-items: center;
+}
+
+.bubble-container > * {
+  width: 150px;
+  margin-right: 10px;
 }
 </style>

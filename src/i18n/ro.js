@@ -51,7 +51,7 @@ export default {
     },
     maxOfN: {
       title: 'Algoritmul de determinare a maximului dintre n numere',
-      explanation: 'Algoritmul de determinare a maximului dintre n numere presupune ca primul numar citit este cel mai mare.<br />Apoi, itereaza si compara fiecare dintre celelalte numere citite cu maximul curent.<br />Daca numarul este mai mare, atunci se actualizeaza valoarea maximului.<br />La finalul algoritmului, max va contine cel mai mare numar citit dintre cele n valori.',
+      explanation: 'Algoritmul de determinare a maximului dintre n numere presupune că primul număr citit este cel mai mare.<br />Apoi, iterează și compară fiecare dintre celelalte numere citite cu maximul curent.<br />Dacă numărul este mai mare, atunci se actualizează valoarea maximului.<br />La finalul algoritmului, max va conține cel mai mare număr citit dintre cele n valori.',
     },
   },
 };
