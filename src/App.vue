@@ -37,6 +37,9 @@ body, html {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
 }
 
 .main {
