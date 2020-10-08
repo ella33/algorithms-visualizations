@@ -35,6 +35,13 @@ export const flattenAlgorithm = (algo) => {
   }));
 };
 
+/**
+ * Utility function which highlights a specific or the next active algorithm
+ * command.
+ *
+ * @param {Object} timeline The anime.js timeline object
+ * @param {Object} options Object passing commandNumber or animation options
+ */
 export function highlightCommand(timeline, { commandNumber, animeOptions = {} } = {}) {
   if (commandNumber < 0) return timeline; /** noop */
 
@@ -54,6 +61,12 @@ export function highlightCommand(timeline, { commandNumber, animeOptions = {} } 
   });
 }
 
+/**
+ * Utility function which resets the highlighted commands passed as argument.
+ *
+ * @param {Object} timeline The anime.js timeline object
+ * @param {Array} commands Array of command numbers to reset the highlighted commands
+ */
 export function resetCommands(timeline, commands) {
   const targets = commands.map((commandNumber) => `.command-${commandNumber}`);
 
