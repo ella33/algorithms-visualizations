@@ -66,33 +66,21 @@ export default {
   overflow: hidden;
 }
 
-@media screen and (max-width: 960px) {
-  .board {
-    grid-template-columns: 1fr;
-  }
-
-  .timeline {
-    grid-row: 1;
-  }
-
-  .blackboard {
-    display: none;
-  }
+.blackboard, .timeline-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .blackboard {
   background-image: linear-gradient(45deg, #434343, #000000);
   color: #fff;
   font-size: 1.25rem;
-  flex-direction: column;
   overflow: auto;
 }
 
 .timeline-wrapper {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding: 20px;
   max-width: 100%;
 }
@@ -121,5 +109,19 @@ export default {
 
 .hint {
   font-size: 0.75rem;
+}
+
+@media screen and (max-width: 960px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    grid-row: 1;
+  }
+
+  .blackboard {
+    display: none;
+  }
 }
 </style>
