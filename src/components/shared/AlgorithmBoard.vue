@@ -1,14 +1,15 @@
 <template>
-  <div class="main">
+  <div class="board">
     <div class="content-wrapper">
-      <div class="wrapper timeline">
-        <slot name="timeline"></slot>
-
+      <div class="timeline">
+        <div class="timeline-wrapper">
+          <slot name="timeline"></slot>
+        </div>
         <button v-on:click="runAlgorithm" :disabled="timelineInProgress">{{$t('GENERAL.run')}}</button>
       </div>
     </div>
 
-    <div class="wrapper blackboard">
+    <div class="blackboard">
       <slot name="blackboard"></slot>
     </div>
   </div>
@@ -58,6 +59,27 @@ export default {
 </script>
 
 <style scoped>
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 960px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    grid-row: 1;
+  }
+
+  .blackboard {
+    display: none;
+  }
+}
+
 .blackboard {
   background-image: linear-gradient(45deg, #434343, #000000);
   color: #fff;
@@ -66,16 +88,26 @@ export default {
   overflow: auto;
 }
 
+.timeline-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  max-width: 100%;
+}
+
 .timeline {
-  padding: 20px 20px 60px 20px;
-  position: relative;
-  min-height: 450px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .timeline button {
-  position: absolute;
-  bottom: 0;
   width: 300px;
+  height: 60px;
   padding: 10px;
   border-radius: 10px 10px 0 0;
   background-image: linear-gradient(45.34deg, #355C7D 5.66%, #6C5B7B 49.09%, #C06C84 93.43%);

@@ -42,21 +42,12 @@ body, html {
   position: relative;
 }
 
-.main {
-  display: flex;
-  flex: 1;
-}
-
-@media screen and (max-width: 960px) {
-  .main {
-    display: block;
-  }
-}
-
 .content-wrapper {
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow: hidden;
+  min-height: 520px;
 }
 
 .full-height {

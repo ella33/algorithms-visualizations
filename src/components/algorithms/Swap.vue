@@ -1,9 +1,11 @@
 <template>
   <AlgorithmBoard v-on:ready="onTimelineReady($event)">
     <template #timeline>
-      <div class="cup a">a</div>
-      <div class="cup b">b</div>
-      <div class="cup aux">aux</div>
+      <div class="cups-container">
+        <div class="cup a">a</div>
+        <div class="cup b">b</div>
+        <div class="cup aux">aux</div>
+      </div>
     </template>
 
     <template #blackboard>
@@ -133,6 +135,11 @@ export default {
 </script>
 
 <style scoped>
+.cups-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .cup {
   border-radius: 50%;
   width: 50px;

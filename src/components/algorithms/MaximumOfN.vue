@@ -1,7 +1,6 @@
 <template>
   <AlgorithmBoard v-on:ready="onTimelineReady($event)" :onRun="onRunAlgorithm">
     <template #timeline>
-      <div class="content-wrapper centered-items">
         <div class="variables">
           <div class="box n">
             <div class="title">n:</div>
@@ -19,17 +18,12 @@
         </div>
 
         <div class="bubble-container">
-          <div>
-            <div class="current-x">
-              <div class="bubble-x"></div>
-              <div class="value">{{currentX}}</div>
-            </div>
+          <div class="current-x">
+            <div class="bubble-x"></div>
+            <div class="value">{{currentX}}</div>
           </div>
-          <div>
-            <div class="max">max: {{max}}</div>
-          </div>
+          <div class="max">max: {{max}}</div>
         </div>
-      </div>
     </template>
 
     <template #blackboard>
@@ -63,7 +57,7 @@ export default {
   }),
   created() {
     this.n = 5;
-    this.x = [8, 0, 11, 30, 5];
+    this.x = [8, 0, 11, 20, 5];
   },
   methods: {
     onRunAlgorithm() {
@@ -139,9 +133,12 @@ export default {
 </script>
 
 <style scoped>
+.box, .x, .max, .current-x {
+  opacity: 0;
+}
+
 .box {
   display: inline-flex;
-  opacity: 0;
   flex-direction: column;
   margin: 0 5px;
 }
@@ -176,7 +173,6 @@ export default {
 }
 
 .x {
-  opacity: 0;
   border-right: 1px solid #20A4F3;
   padding: 0 5px;
 }
@@ -190,25 +186,22 @@ export default {
 }
 
 .max {
-  opacity: 0;
   color: #fff;
   width: 100px;
   height: 100px;
   border-radius: 50%;
   background: #D72483;
-  transform: scale(0);
+  box-shadow: 6px 4px 5px 0px #EBEBEB;
+}
+
+.max, .current-x {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 6px 4px 5px 0px #EBEBEB;
 }
 
 .current-x {
   position: relative;
-  opacity: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .current-x .value {
@@ -225,22 +218,22 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #F4F7BE;
+  background-color: #20A4F3;
   border-radius: 50%;
   box-shadow: 6px 4px 5px 0px #EBEBEB;
 }
 
 .variables {
   margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
 }
 
 .bubble-container {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  grid-column-gap: 30px;
+  justify-items: center;
 }
 
-.bubble-container > * {
-  width: 150px;
-  margin-right: 10px;
-}
 </style>
