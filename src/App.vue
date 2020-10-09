@@ -47,7 +47,6 @@ body, html {
   flex-direction: column;
   flex: 1;
   overflow: hidden;
-  min-height: 520px;
 }
 
 .full-height {

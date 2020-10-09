@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="content-wrapper">
     <div class="wrapper">
       <p class="disclaimer">{{$t('HOME.description')}}</p>
     </div>
@@ -15,5 +15,7 @@ export default {
 <style scoped>
 .disclaimer {
   width: 700px;
+  max-width: 100%;
+  padding: 20px;
 }
 </style>

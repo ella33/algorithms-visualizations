@@ -1,29 +1,29 @@
 <template>
   <AlgorithmBoard v-on:ready="onTimelineReady($event)" :onRun="onRunAlgorithm">
     <template #timeline>
-        <div class="variables">
-          <div class="box n">
-            <div class="title">n:</div>
-            <div class="content">{{n}}</div>
-          </div>
-
-          <div class="box box-queue">
-            <div class="title">x:</div>
-            <div class="content">
-              <span :class="['x', `x-${index + 1}`]" v-for="(item, index) in x" :key="index">
-                {{item}}
-              </span>
-            </div>
-          </div>
+      <div class="variables">
+        <div class="box n">
+          <div class="title">n:</div>
+          <div class="content">{{n}}</div>
         </div>
 
-        <div class="bubble-container">
-          <div class="current-x">
-            <div class="bubble-x"></div>
-            <div class="value">{{currentX}}</div>
+        <div class="box box-queue">
+          <div class="title">x:</div>
+          <div class="content">
+            <span :class="['x', `x-${index + 1}`]" v-for="(item, index) in x" :key="index">
+              {{item}}
+            </span>
           </div>
-          <div class="max">max: {{max}}</div>
         </div>
+      </div>
+
+      <div class="bubble-container">
+        <div class="current-x">
+          <div class="bubble-x"></div>
+          <div class="value">{{currentX}}</div>
+        </div>
+        <div class="max">max: {{max}}</div>
+      </div>
     </template>
 
     <template #blackboard>
